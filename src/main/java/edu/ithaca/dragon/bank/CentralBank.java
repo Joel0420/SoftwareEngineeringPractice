@@ -127,7 +127,6 @@ public class CentralBank implements AdvancedAPI, AdminAPI {
     @Override
     public double calcTotalAssets() {
         double total = 0;
-
         for (HashMap.Entry<String,BankAccount> entry : customerCollection.entrySet()){
             total += entry.getValue().getBalance();
         }
