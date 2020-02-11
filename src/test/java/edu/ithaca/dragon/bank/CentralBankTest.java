@@ -20,26 +20,25 @@ public class CentralBankTest {
             //asks for the balance of an account not in the collection
             assertThrows(IllegalArgumentException.class, ()-> cb.checkBalance("ab@c.com",customerCollection));
 
-        }
+        }*/
 
         @Test
         void depositTest() {
-            BankAccount customerCollection[]= new BankAccount[1];
-            customerCollection[0] = new BankAccount("a@b.com",305, "abcd1234");
+            CentralBank cb = new CentralBank();
+            cb.createAccount("a@b.com", 305, "abcd1234");
 
             //deposits a valid amount into a valid bank account
-            CentralBank cb = new CentralBank();
-            cb.deposit("a@b.com",50, customerCollection);
-            assertEquals(355, cb.checkBalance("a@b.com",customerCollection));
+            cb.deposit("a@b.com",50);
+            assertEquals(355, cb.checkBalance("a@b.com"));
 
             //attempts to deposit an invalid amount
-            assertThrows(IllegalArgumentException.class, ()-> cb.deposit("a@b.com",5000.608,customerCollection));
+            assertThrows(IllegalArgumentException.class, ()-> cb.deposit("a@b.com",5000.608));
 
             //attempts to deposit 0
-            assertThrows(IllegalArgumentException.class, ()-> cb.deposit("a@b.com",0,customerCollection));
+            assertThrows(IllegalArgumentException.class, ()-> cb.deposit("a@b.com",0));
 
 
-        }*/
+        }
         @Test
         void confirmCredentialsTest(){
             CentralBank cB = new CentralBank();

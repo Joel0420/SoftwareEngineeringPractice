@@ -69,6 +69,18 @@ public class CentralBank implements AdvancedAPI, AdminAPI {
 
     @Override
     public void deposit(String acctId, double amount) throws IllegalArgumentException {
+        BankAccount bankAccount = customerCollection.get(acctId);
+
+        if (isAmountValid(amount) == false) {
+            throw new IllegalArgumentException("The amount you entered " + amount + " is invalid");
+        }
+        if (amount == 0){ //checks that deposit amount isn't 0
+            throw new IllegalArgumentException("Cannot withdraw $0 or less");
+        }
+        else {
+            bankAccount.balance += amount;
+        }
+
 
     }
 
