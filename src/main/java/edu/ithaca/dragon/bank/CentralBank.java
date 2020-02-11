@@ -7,6 +7,8 @@ import java.util.HashMap;
 public class CentralBank implements AdvancedAPI, AdminAPI {
 
     private HashMap<String, BankAccount> customerCollection = new HashMap<String, BankAccount>();
+    private HashMap<String, BankAccount> frozenAccountCollection = new HashMap<String, BankAccount>();
+
 
     public CentralBank (){
 
@@ -134,12 +136,20 @@ public class CentralBank implements AdvancedAPI, AdminAPI {
 
     @Override
     public void freezeAccount(String acctId) {
-
+        BankAccount bankAccount = null;
+        if (customerCollection.containsValue(acctId)){
+            bankAccount = customerCollection.get(acctId);
+        }
+        frozenAccountCollection.put(acctId,bankAccount);
     }
 
     @Override
     public void unfreezeAcct(String acctId) {
-
+        BankAccount bankAccount = null;
+        if (frozenAccountCollection.containsValue(acctId)){
+            bankAccount = frozenAccountCollection.get(acctId);
+        }
+        customerCollection.put(acctId,bankAccount);
     }
 
     @Override
@@ -160,6 +170,7 @@ public class CentralBank implements AdvancedAPI, AdminAPI {
         }
     }
 
+    //stub for test case
     public boolean checkCustomerCollection(String acctId){
         if (customerCollection.containsKey(acctId)){
             return false;

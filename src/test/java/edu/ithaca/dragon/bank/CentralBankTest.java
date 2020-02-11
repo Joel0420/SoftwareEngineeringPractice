@@ -104,7 +104,15 @@ public class CentralBankTest {
 
         cb.transactionHistory("LOLKrisHumphries@72daymarriage.com");
         cb.transactionHistory("LilYoungHova@WeRtheWorld.net");
+    }
 
+    @Test
+    void freezeAccountTest(){
+        CentralBank cb = new CentralBank();
+        cb.createAccount("LOLKrisHumphries@72daymarriage.com", 400, "CantKeepAKardashian");
+        cb.createAccount("LilYoungHova@WeRtheWorld.net", 200, "RapisBack2k2k");
 
+        cb.freezeAccount("LOLKrisHumphries@72daymarriage.com");
+        cb.checkCustomerCollection("LOLKrisHumphries@72daymarriage.com");
     }
 }
