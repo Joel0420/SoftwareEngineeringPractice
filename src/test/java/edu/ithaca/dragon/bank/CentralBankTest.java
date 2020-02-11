@@ -128,4 +128,16 @@ public class CentralBankTest {
         cb.unfreezeAcct("LOLKrisHumphries@72daymarriage.com");
         assertFalse(cb.checkCustomerCollection("LOLKrisHumphries@72daymarriage.com"));
     }
+
+    @Test
+    void calcTotalAssetsTest () {
+        CentralBank cb = new CentralBank();
+        cb.createAccount("jiggy@ithaca.edu", 200, "PurpleNurple");
+        cb.createAccount("ben@ithaca.edu", 500.75, "lol");
+        cb.createAccount("prav@ithaca.edu", 800, "bob");
+
+        assertEquals(1500.75,cb.calcTotalAssets());
+
+    }
+
 }
