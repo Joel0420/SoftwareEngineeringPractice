@@ -69,5 +69,10 @@ public class CentralBankTest {
 
 
         }
+
+        @Test
+        void transfer(){
+
+    }
 }
 
