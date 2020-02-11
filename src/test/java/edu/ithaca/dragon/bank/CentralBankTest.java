@@ -7,17 +7,7 @@ import static org.junit.jupiter.api.Assertions.*;
 public class CentralBankTest {
 
 
-        @Test
-        void checkCredentials(){
-            BankAccount customerCollection[]= new BankAccount[1];
-            customerCollection[0] = new BankAccount("a@b.com",305, "abcd1234");
-
-            CentralBank cb = new CentralBank();
-            assertEquals(true, cb.confirmCredentials("a@b.com","abcd1234", customerCollection));
-
-        }
-
-        @Test
+       /* @Test
         void checkBalance() {
             BankAccount customerCollection[]= new BankAccount[1];
             customerCollection[0] = new BankAccount("a@b.com",305, "abcd1234");
@@ -49,23 +39,39 @@ public class CentralBankTest {
             assertThrows(IllegalArgumentException.class, ()-> cb.deposit("a@b.com",0,customerCollection));
 
 
-        }
+        }*/
+        @Test
+        void confirmCredentialsTest(){
+            CentralBank cB = new CentralBank();
+            cB.createAccount("ppatel@ithaca.edu",500,"ITH19");
+            cB.createAccount("mdad@ithaca.edu",500,"ITH20");
+            cB.createAccount("kweal@ithaca.edu",500,"ITH21");
 
+            assertTrue(cB.confirmCredentials("ppatel@ithaca.edu","ITH19"));
+            assertTrue(cB.confirmCredentials("mdad@ithaca.edu","ITH20"));
+            assertTrue(cB.confirmCredentials("kweal@ithaca.edu","ITH21"));
+
+            assertFalse(cB.confirmCredentials("Beefstew@rolling.org","WER1"));
+            assertFalse(cB.confirmCredentials("Cornbeef@rocks.com","DANCER23"));
+            assertFalse(cB.confirmCredentials("sloppyJO@beverages.net","HollY23!"));
+
+
+        }
         @Test
         void withdrawTest() throws InsufficientFundsException {
-            BankAccount customerCollection[]= new BankAccount[1];
-            customerCollection[0] = new BankAccount("a@b.com",400, "ABCD1234");
             CentralBank cb = new CentralBank();
 
+            cb.createAccount("a@b.com", 400, "ABCD1234");
+
             //withdraws a valid amount with sufficient funds
-            cb.withdraw("a@b.com",200,customerCollection);
-            assertEquals(200,cb.checkBalance("a@b.com",customerCollection));
+            cb.withdraw("a@b.com",200);
+            assertEquals(200,cb.checkBalance("a@b.com"));
 
             //withdraws an invalid amount with sufficient funds
-            assertThrows(IllegalArgumentException.class, ()-> cb.withdraw("a@b.com",-20.9088,customerCollection));
+            assertThrows(IllegalArgumentException.class, ()-> cb.withdraw("a@b.com",-20.9088));
 
             //withdraws a valid amount with insufficient funds
-            assertThrows(InsufficientFundsException.class, ()-> cb.withdraw("a@b.com",560,customerCollection));
+            assertThrows(InsufficientFundsException.class, ()-> cb.withdraw("a@b.com",560));
 
 
         }
