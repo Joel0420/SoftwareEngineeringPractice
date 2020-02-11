@@ -115,4 +115,17 @@ public class CentralBankTest {
         cb.freezeAccount("LOLKrisHumphries@72daymarriage.com");
         cb.checkCustomerCollection("LOLKrisHumphries@72daymarriage.com");
     }
+
+    @Test
+    void unfreezeAccountTest(){
+        CentralBank cb = new CentralBank();
+        cb.createAccount("LOLKrisHumphries@72daymarriage.com", 400, "CantKeepAKardashian");
+        cb.createAccount("LilYoungHova@WeRtheWorld.net", 200, "RapisBack2k2k");
+
+        cb.freezeAccount("LOLKrisHumphries@72daymarriage.com");
+        cb.checkCustomerCollection("LOLKrisHumphries@72daymarriage.com");
+
+        cb.unfreezeAcct("LOLKrisHumphries@72daymarriage.com");
+        assertFalse(cb.checkCustomerCollection("LOLKrisHumphries@72daymarriage.com"));
+    }
 }
