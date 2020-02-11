@@ -87,6 +87,25 @@ public class CentralBank implements AdvancedAPI, AdminAPI {
     @Override
     public void transfer(String acctIdToWithdrawFrom, String acctIdToDepositTo, double amount) throws InsufficientFundsException {
 
+        BankAccount bankAccountW = customerCollection.get(acctIdToWithdrawFrom);
+        BankAccount bankAccountD = customerCollection.get(acctIdToDepositTo);
+
+        if (isAmountValid(amount) == false) {
+            throw new IllegalArgumentException("The amount you entered " + amount + " is invalid");
+        }
+        if (amount < .01){ //checks that withdraw amount isnt 0
+            throw new IllegalArgumentException("Cannot transfer "+amount);
+        }
+        if (amount == 0){ //checks that deposit amount isn't 0
+            throw new IllegalArgumentException("Cannot transfer $0 or less");
+        }
+        if (bankAccountW.balance < amount){
+            throw new InsufficientFundsException("Cannot draw more than account balance.");
+        }
+        else {
+            bankAccountW.withdraw(amount);
+            bankAccountD.deposit(amount);
+        }
     }
 
     @Override

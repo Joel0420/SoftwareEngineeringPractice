@@ -72,6 +72,17 @@ public class CentralBankTest {
             //withdraws a valid amount with insufficient funds
             assertThrows(InsufficientFundsException.class, ()-> cb.withdraw("a@b.com",560));
 
+        }
+        @Test
+        void transferTest() throws InsufficientFundsException {
+            CentralBank cb = new CentralBank();
+            cb.createAccount("ppatel@ithaca.edu",500,"Tumbleweed34");
+            cb.createAccount("prav15@gmail.com",500,"GiantGnomeo1");
+
+            cb.transfer("ppatel@ithaca.edu", "prav15@gmail.com",100);
+            assertEquals(400, cb.checkBalance("ppatel@ithaca.edu"));
+            assertEquals(600, cb.checkBalance("prav15@gmail.com"));
+
 
         }
 }
