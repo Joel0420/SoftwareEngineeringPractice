@@ -8,6 +8,9 @@ public class CentralBank implements AdvancedAPI, AdminAPI {
 
     private HashMap<String, BankAccount> customerCollection = new HashMap<String, BankAccount>();
     private HashMap<String, BankAccount> frozenAccountCollection = new HashMap<String, BankAccount>();
+    private HashMap<String, User> userCollection = new HashMap<String, User>();
+
+
 
 
     public CentralBank (){
@@ -35,6 +38,7 @@ public class CentralBank implements AdvancedAPI, AdminAPI {
     //----------------- BasicAPI methods -------------------------//
 
     public boolean confirmCredentials(String acctId, String password) {
+
         for (int i = 0; i < customerCollection.size(); i++) {
             if (customerCollection.containsKey(acctId)) {
                 BankAccount bankAccount = customerCollection.get(acctId);
@@ -52,6 +56,8 @@ public class CentralBank implements AdvancedAPI, AdminAPI {
             BankAccount bankAccount = customerCollection.get(acctId);
             return bankAccount.getBalance();
         }
+
+
         throw new IllegalArgumentException("please provide valid accout ID");
     }
 
@@ -130,6 +136,7 @@ public class CentralBank implements AdvancedAPI, AdminAPI {
         for (HashMap.Entry<String,BankAccount> entry : customerCollection.entrySet()){
             total += entry.getValue().getBalance();
         }
+
         return total;
     }
 
