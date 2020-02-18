@@ -6,6 +6,18 @@ import static org.junit.jupiter.api.Assertions.*;
 
 public class CentralBankTest {
 
+    //create a test that creates an instance of a cb and has a bunch of accounts.
+    @Test
+    public static CentralBank buildTestObject(){
+        CentralBank cb = new CentralBank();
+        cb.createAccount("a@b.com", 305, "abcd1234");
+        cb.createAccount("ppatel@ithaca.edu",500,"ITH19");
+        cb.createAccount("mdad@ithaca.edu",500,"ITH20");
+        cb.createAccount("kweal@ithaca.edu",500,"ITH21");
+
+        return cb;
+    }
+
 
     @Test
      void checkBalance() {
